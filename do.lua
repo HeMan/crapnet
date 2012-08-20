@@ -8,6 +8,8 @@ require"cgilua.post"
 require"lxp"
 require"xmlrpc.server"
 
+dofile("crapconfig.lua")
+
 cgi2={}
 cgilua.urlcode.parsequery (SAPI.Request.getpostdata(2048),cgi2)
 
@@ -17,10 +19,22 @@ for k,v in pairs(cgi2) do
 end
 
 myserver = xmlrpc.server:new()
+
 function hello() 
 	return "Hello world"
 end
 
+function reset()
+	return "Reseted"
+end
+
+function getpresets()
+	return presets
+end
+
+
 myserver:register("hello", hello)
+myserver:register("reset", reset)
+myserver:register("getpresets", getpresets)
 
 myserver:handle(cgi)
