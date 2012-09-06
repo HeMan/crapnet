@@ -20,21 +20,27 @@ end
 
 myserver = xmlrpc.server:new()
 
-function hello() 
+--- Function to test that XMLRPC in it self is working.
+-- @return "Hello world"
+function myserver.methods.hello()
 	return "Hello world"
 end
 
-function reset()
+function myserver.methods.reset()
 	return "Reseted"
 end
 
-function getpresets()
+function myserver.methods.getpresets()
 	return presets
 end
 
 
-myserver:register("hello", hello)
-myserver:register("reset", reset)
-myserver:register("getpresets", getpresets)
+function myserver.methods.tcversion()
+	local f=assert(io.popen('/usr/sbin/tc -V','r'))
+	local s=assert(f:read('*a'))
+	f:close()
+	if s=="" then return 0 end
+	return s
+end
 
 myserver:handle(cgi)
