@@ -12,8 +12,11 @@ Prereqs
 -------
 Crapnet is built to be ran on a OpenWRT router with a few extra packages.
 
-* OpenWRT 10.03
-* Luaexpat
+* OpenWRT 10.03 (or newer, 12.09 beta is tested)
+* luaexpat
+* luafilesystem
+* tc
+* kmod-netem
 
 ### Unittests
 You can find unittests at [crapnet-test][1]
